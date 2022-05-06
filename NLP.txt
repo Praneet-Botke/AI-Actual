@@ -1,0 +1,67 @@
+import nltk
+
+
+import spacy
+from spacy import displacy
+
+NER = spacy.load("en_core_web_sm")
+
+
+raw_text="The Indian Space Research Organisation or is the national space agency of India, headquartered in Bengaluru. It operates under Department of Space which is directly overseen by the Prime Minister of India while Chairman of ISRO acts as executive of DOS as well."
+text1= NER(raw_text)
+
+for word in text1.ents:
+    print(word.text,word.label_)
+
+
+nltk.download('averaged_perceptron_tagger')  
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize
+text = word_tokenize("Butterfly is beautiful ")
+print(text)
+nltk.pos_tag(text)
+
+
+nltk.download('averaged_perceptron_tagger')  
+nltk.download('punkt')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+from nltk.tokenize import word_tokenize
+text = word_tokenize("Jim bought 300 shares of Acme Corp. in 2006")
+posttagwors=nltk.pos_tag(text)
+namedentity=nltk.ne_chunk(posttagwors,binary=False)
+print(namedentity)
+
+
+!pip install simpletransformers
+
+
+from simpletransformers.language_representation import RepresentationModel
+sentences = ["அம்மா என்றால் அன்பு","ஒழுக்கம் உயர்வு தரும்"] #it should always be a list
+model = RepresentationModel(
+        model_type="bert",
+        model_name="bert-base-multilingual-cased",
+        use_cuda=False
+    )
+sentence_vectors = model.encode_sentences(sentences, combine_strategy="mean")
+
+
+from simpletransformers.language_representation import RepresentationModel
+sentences = ["कर्तव्य है भगवान","अपने लक्ष्य उच्च निर्धारित करें"] #it should always be a list
+model = RepresentationModel(
+        model_type="bert",
+        model_name="bert-base-multilingual-cased",
+        use_cuda=False
+    )
+sentence_vectors = model.encode_sentences(sentences, combine_strategy="mean")
+
+
+sentence_vectors.shape
+
+
+sentence_vectors
+
+
+
+
+
